@@ -3,7 +3,7 @@ import {sequelize} from "../config/database.js";
 
 export const addBook = async (req, res) => {
 
-    const t = await sequelize.transaction();
+    const t = await sequelize.transaction({readOnly: true});
 
     try {
         const {isbn, title, authors, publisher} = req.body;
@@ -17,7 +17,7 @@ export const addBook = async (req, res) => {
         // Create or find the publisher
         let publisherRecord = await Publisher.findByPk(publisher);
         if (!publisherRecord) {
-            publisherRecord = await Publisher.create({publisher_name: publisher}, {transaction: t});
+            await Publisher.create({publisher_name: publisher}, {transaction: t});
         }
 
         // Process the authors array
