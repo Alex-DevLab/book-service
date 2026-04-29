@@ -103,3 +103,15 @@ export const removeBook = async (req, res) => {
         });
     }
 }
+
+export async function updateBookTitle(req, res) {
+    throw new Error('Not implemented');
+}
+
+export async function findBooksByAuthor(req, res) {
+    throw new Error('Not implemented');
+}
+
+export async function findBooksByPublisher(req, res) {
+    throw new Error('Not implemented');
+}
