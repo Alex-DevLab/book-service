@@ -12,7 +12,7 @@
   "type": "module",
   "dependencies": {
     "express": "^5.2.1",
-    "mysql2": "^3.22.3",
+    "pg": "^8.20.0",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
