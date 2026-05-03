@@ -3,7 +3,7 @@ import {sequelize} from "../config/database.js";
 
 export const addBook = async (req, res) => {
 
-    const t = await sequelize.transaction({readOnly: true});
+    const t = await sequelize.transaction();
 
     try {
         const {isbn, title, authors, publisher} = req.body;
@@ -123,8 +123,9 @@ export async function updateBookTitle(req, res) {
         });
 
         if (book) {
-            book.title = req.params.title;
-            await book.save({transaction: t});
+            // book.title = req.params.title;
+            // await book.save({transaction: t});
+            await book.update({title: req.params.title}, {transaction: t});
             await t.commit();
             return res.status(200).send(book);
         } else {
@@ -180,6 +181,7 @@ export async function findBooksByPublisher(req, res) {
     const t = await sequelize.transaction();
     try {
         const books = await Book.findAll({
+
             attributes: {
                 include: [[sequelize.col('publisher_name'), 'publisher']]
             },
