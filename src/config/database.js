@@ -1,5 +1,6 @@
 import 'dotenv/config.js'
 import {Sequelize} from 'sequelize'
+import * as fs from "node:fs";
 
 // Create a new Sequelize instance
 const sequelize = new Sequelize(
@@ -14,7 +15,7 @@ const sequelize = new Sequelize(
         dialectOptions: {
             ssl: {
                 require: true,
-                rejectUnauthorized: false
+                ca: fs.readFileSync('./ca.pem').toString()
             }
         }
     });
